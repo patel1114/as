@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { NoteProvider, NoteContext } from "../context/NoteContext";
+import { NoteContext } from "../context/NoteContext";
 
 function Note(props) {
   const { deleteNote } = useContext(NoteContext);

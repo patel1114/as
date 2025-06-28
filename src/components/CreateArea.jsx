@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { NoteProvider, NoteContext } from "../context/NoteContext";
+import { NoteContext } from "../context/NoteContext";
 
 function CreateArea() {
   const { addNote } = useContext(NoteContext);
