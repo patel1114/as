@@ -1,4 +1,4 @@
-/* src/styles.css */
+/* Modern Keeper App CSS Overhaul */
 * {
     margin: 0;
     padding: 0;
@@ -6,147 +6,182 @@
 }
 
 html {
-    font-family: "Montserrat", sans-serif;
+    font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+    background: #f4f6fb;
 }
 
 body {
-    background-color: #eee;
-    background-image: url("https://www.transparenttextures.com/patterns/cubes.png");
-    padding: 0 16px;
     min-height: 100vh;
+    background: linear-gradient(135deg, #f4f6fb 0%, #e3eafc 100%);
+    padding: 0;
 }
 
 header {
-    background-color: #f5ba13;
-    margin: auto -16px;
-    padding: 16px 32px;
-    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
+    background: linear-gradient(90deg, #1976d2 60%, #64b5f6 100%);
+    box-shadow: 0 2px 12px 0 rgba(0,0,0,0.08);
+    padding: 24px 0 16px 0;
     display: flex;
     align-items: center;
     justify-content: center;
+    border-bottom-left-radius: 24px;
+    border-bottom-right-radius: 24px;
 }
 
 header h1 {
     color: #fff;
-    font-family: "McLaren", cursive;
-    font-weight: 200;
-    font-size: 2rem;
+    font-family: 'McLaren', cursive;
+    font-weight: 700;
+    font-size: 2.2rem;
+    letter-spacing: 2px;
+    text-shadow: 0 2px 8px #1976d2cc;
+    display: flex;
+    align-items: center;
 }
 
 footer {
     position: relative;
     text-align: center;
-    bottom: 0;
     width: 100%;
-    height: 2.5rem;
-    margin-left: 0;
     margin-top: 40px;
-}
-
-footer p {
-    color: #ccc;
+    padding: 16px 0 8px 0;
+    background: #0d47a1;
+    font-size: 1rem;
+    color: #bbdefb;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
 }
 
 .main-notes-container {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    gap: 28px;
     justify-content: center;
     align-items: flex-start;
     margin: 0 auto;
     max-width: 1200px;
+    padding: 24px 8px 0 8px;
 }
 
 .note {
     background: #fff;
-    border-radius: 7px;
-    box-shadow: 0 2px 5px #ccc;
-    padding: 10px;
-    width: 240px;
-    margin: 16px;
-    float: none;
+    border-radius: 18px;
+    box-shadow: 0 4px 24px 0 rgba(0,0,0,0.10);
+    padding: 22px 18px 16px 18px;
+    min-height: 140px;
+    word-break: break-word;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    min-height: 120px;
-    word-break: break-word;
+    transition: box-shadow 0.2s, transform 0.2s;
+    position: relative;
+    border: 2px solid transparent;
+    animation: fadeIn 0.5s;
+}
+
+.note:hover {
+    box-shadow: 0 8px 32px 0 rgba(245,186,19,0.18), 0 2px 8px 0 rgba(0,0,0,0.10);
+    transform: translateY(-2px) scale(1.02);
+    border-color: #f5ba13;
 }
 
 .note h1 {
-    font-size: 1.1em;
-    margin-bottom: 6px;
+    font-size: 1.18em;
+    margin-bottom: 8px;
+    font-weight: 700;
+    color: #333;
 }
 
 .note p {
-    font-size: 1.1em;
-    margin-bottom: 10px;
+    font-size: 1.08em;
+    margin-bottom: 12px;
+    color: #444;
     white-space: pre-wrap;
     word-wrap: break-word;
 }
 
 .note button {
-    align-self: flex-end;
-    margin-right: 0;
-    color: #f5ba13;
+    background: none;
     border: none;
-    width: 40px;
-    height: 40px;
+    color: #f5ba13;
+    font-size: 1.4rem;
     cursor: pointer;
-    outline: none;
-    background-color: transparent;
-    font-size: 1.5rem;
-    transition: background 0.2s;
+    margin-left: 8px;
     border-radius: 50%;
+    transition: background 0.2s, color 0.2s;
+    padding: 6px;
 }
 
-.note button:active {
+.note button:active, .note button:focus {
     background: #f5ba13;
     color: #fff;
+    outline: none;
+}
+
+.note select {
+    border-radius: 6px;
+    border: 1px solid #e0e0e0;
+    padding: 4px 10px;
+    font-size: 1em;
+    margin-right: 6px;
+    background: #f9f9f9;
+    color: #333;
 }
 
 form.create-note {
     position: relative;
-    width: 480px;
-    max-width: 95vw;
-    margin: 30px auto 20px auto;
+    width: 100%;
+    max-width: 480px;
+    margin: 32px auto 18px auto;
     background: #fff;
-    padding: 15px;
-    border-radius: 7px;
-    box-shadow: 0 1px 5px rgb(138, 137, 137);
+    padding: 22px 18px 18px 18px;
+    border-radius: 18px;
+    box-shadow: 0 2px 12px 0 rgba(0,0,0,0.08);
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
+    animation: fadeIn 0.5s;
 }
 
 form.create-note input,
 form.create-note textarea {
     width: 100%;
     border: none;
-    padding: 8px;
+    padding: 10px 12px;
     outline: none;
-    font-size: 1.2em;
+    font-size: 1.1em;
     font-family: inherit;
     resize: none;
-    border-radius: 4px;
-    background: #f9f9f9;
+    border-radius: 8px;
+    background: #f7f7fa;
+    margin-bottom: 6px;
+    color: #222;
+    box-shadow: 0 1px 2px #f5ba1322;
 }
 
 form.create-note button {
     position: absolute;
     right: 18px;
-    bottom: -18px;
+    bottom: -22px;
     background: #f5ba13;
     color: #fff;
     border: none;
     border-radius: 50%;
-    width: 44px;
-    height: 44px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    width: 52px;
+    height: 52px;
+    box-shadow: 0 2px 8px rgba(245,186,19,0.18);
     cursor: pointer;
     outline: none;
-    font-size: 1.5rem;
+    font-size: 2rem;
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: background 0.2s, box-shadow 0.2s;
+    z-index: 2;
+}
+
+form.create-note button:active, form.create-note button:focus {
+    background: #ffb300;
+    box-shadow: 0 4px 16px rgba(245,186,19,0.22);
 }
 
 .filter-bar {
@@ -154,70 +189,107 @@ form.create-note button {
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    width: 480px;
-    max-width: 95vw;
-    margin: 20px auto;
+    width: 100%;
+    max-width: 480px;
+    margin: 24px auto 0 auto;
     background: #fff;
-    padding: 10px 15px;
-    border-radius: 7px;
-    box-shadow: 0 1px 5px rgb(138, 137, 137);
+    padding: 12px 18px;
+    border-radius: 12px;
+    box-shadow: 0 1px 5px rgb(245,186,19,0.08);
     gap: 10px;
+    animation: fadeIn 0.5s;
 }
 
 .filter-bar select {
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    padding: 8px 10px;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
     font-family: inherit;
     font-size: 1em;
+    background: #f7f7fa;
+    color: #333;
 }
 
 .filter-bar input {
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    padding: 8px 10px;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
     font-family: inherit;
     width: 60%;
     font-size: 1em;
+    background: #f7f7fa;
+    color: #333;
 }
 
-@media (max-width: 700px) {
+/* Floating Action Button for mobile */
+.fab {
+    display: none;
+    position: fixed;
+    right: 24px;
+    bottom: 32px;
+    width: 60px;
+    height: 60px;
+    background: #f5ba13;
+    color: #fff;
+    border-radius: 50%;
+    box-shadow: 0 4px 16px rgba(245,186,19,0.22);
+    font-size: 2.5rem;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    cursor: pointer;
+    transition: background 0.2s, box-shadow 0.2s;
+}
+.fab:active, .fab:focus {
+    background: #ffb300;
+    box-shadow: 0 8px 32px rgba(245,186,19,0.28);
+}
+
+@media (max-width: 900px) {
     .main-notes-container {
-        flex-direction: column;
-        align-items: center;
-    }
-    .note {
-        width: 90vw;
-        margin: 10px 0;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 18px;
+        padding: 18px 2vw 0 2vw;
     }
     form.create-note, .filter-bar {
-        width: 98vw;
         max-width: 98vw;
-        margin: 10px auto;
-        padding: 10px 5px;
+        padding: 10px 4vw;
     }
+}
+
+@media (max-width: 600px) {
     header {
-        padding: 12px 8px;
+        padding: 16px 0 10px 0;
+        border-bottom-left-radius: 16px;
+        border-bottom-right-radius: 16px;
     }
     header h1 {
         font-size: 1.3rem;
     }
-}
-
-@media (max-width: 480px) {
-    .note {
-        width: 98vw;
-        padding: 8px;
+    .main-notes-container {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        padding: 10px 1vw 0 1vw;
     }
     form.create-note, .filter-bar {
-        width: 99vw;
         max-width: 99vw;
-        padding: 8px 2px;
+        padding: 8px 2vw;
     }
-    .filter-bar input {
-        width: 100%;
+    .fab {
+        display: flex;
     }
-    header h1 {
-        font-size: 1.1rem;
-    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.note.fade-in {
+  animation: fadeIn 0.5s;
+}
+
+.note button:focus {
+  outline: 2px solid #1976d2;
+  outline-offset: 2px;
 }

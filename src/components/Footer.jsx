@@ -5,7 +5,10 @@ function Footer() {
   
   return (
     <footer>
-      <p>Copyright © {currentYear}</p>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 8 }}>
+        <span style={{ fontSize: 20, color: "#64b5f6" }}>📝</span>
+        <p style={{ margin: 0 }}>Keeper App &copy; {currentYear}</p>
+      </div>
     </footer>
   );
 }

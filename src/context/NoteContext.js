@@ -15,14 +15,20 @@ export const NoteProvider = ({ children }) => {
             title: "Welcome to Keeper App",
             content: "This is your first note. You can add more notes using the form below.",
             priority: "medium",
-            createdAt: new Date().toISOString()
+            createdAt: new Date().toISOString(),
+            pinned: false,
+            archived: false,
+            color: "#fffde7"
           },
           {
             id: 2,
             title: "How to use",
             content: "1. Add notes using the form\n2. Delete notes with the trash icon\n3. Filter notes by priority\n4. Search notes by title or content",
             priority: "high",
-            createdAt: new Date(Date.now() - 86400000).toISOString()
+            createdAt: new Date(Date.now() - 86400000).toISOString(),
+            pinned: true,
+            archived: false,
+            color: "#e3f2fd"
           }
         ];
   });
@@ -38,7 +44,10 @@ export const NoteProvider = ({ children }) => {
       {
         id: Date.now(),
         ...newNote,
-        createdAt: new Date().toISOString()
+        createdAt: new Date().toISOString(),
+        pinned: newNote.pinned || false,
+        archived: false,
+        color: newNote.color || "#fffde7"
       }
     ]);
   };
@@ -47,8 +56,59 @@ export const NoteProvider = ({ children }) => {
     setNotes((prevNotes) => prevNotes.filter((note) => note.id !== id));
   };
 
+  const pinNote = (id) => {
+    setNotes((prevNotes) =>
+      prevNotes.map((note) =>
+        note.id === id ? { ...note, pinned: true } : note
+      )
+    );
+  };
+
+  const unpinNote = (id) => {
+    setNotes((prevNotes) =>
+      prevNotes.map((note) =>
+        note.id === id ? { ...note, pinned: false } : note
+      )
+    );
+  };
+
+  const archiveNote = (id) => {
+    setNotes((prevNotes) =>
+      prevNotes.map((note) =>
+        note.id === id ? { ...note, archived: true, pinned: false } : note
+      )
+    );
+  };
+
+  const unarchiveNote = (id) => {
+    setNotes((prevNotes) =>
+      prevNotes.map((note) =>
+        note.id === id ? { ...note, archived: false } : note
+      )
+    );
+  };
+
+  const setNoteColor = (id, color) => {
+    setNotes((prevNotes) =>
+      prevNotes.map((note) =>
+        note.id === id ? { ...note, color } : note
+      )
+    );
+  };
+
   return (
-    <NoteContext.Provider value={{ notes, addNote, deleteNote }}>
+    <NoteContext.Provider
+      value={{
+        notes,
+        addNote,
+        deleteNote,
+        pinNote,
+        unpinNote,
+        archiveNote,
+        unarchiveNote,
+        setNoteColor
+      }}
+    >
       {children}
     </NoteContext.Provider>
   );
