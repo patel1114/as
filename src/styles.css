@@ -3,102 +3,134 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-  }
-  
-  html {
+}
+
+html {
     font-family: "Montserrat", sans-serif;
-  }
-  
-  body {
+}
+
+body {
     background-color: #eee;
     background-image: url("https://www.transparenttextures.com/patterns/cubes.png");
     padding: 0 16px;
-  }
-  
-  header {
+    min-height: 100vh;
+}
+
+header {
     background-color: #f5ba13;
     margin: auto -16px;
     padding: 16px 32px;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
-  }
-  
-  header h1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+header h1 {
     color: #fff;
     font-family: "McLaren", cursive;
     font-weight: 200;
-  }
-  
-  footer {
-    position: absolute;
+    font-size: 2rem;
+}
+
+footer {
+    position: relative;
     text-align: center;
     bottom: 0;
     width: 100%;
     height: 2.5rem;
-    margin-left: -16px;
-  }
-  
-  footer p {
+    margin-left: 0;
+    margin-top: 40px;
+}
+
+footer p {
     color: #ccc;
-  }
-  
-  .note {
+}
+
+.main-notes-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+.note {
     background: #fff;
     border-radius: 7px;
     box-shadow: 0 2px 5px #ccc;
     padding: 10px;
     width: 240px;
     margin: 16px;
-    float: left;
-  }
-  
-  .note h1 {
+    float: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 120px;
+    word-break: break-word;
+}
+
+.note h1 {
     font-size: 1.1em;
     margin-bottom: 6px;
-  }
-  
-  .note p {
+}
+
+.note p {
     font-size: 1.1em;
     margin-bottom: 10px;
     white-space: pre-wrap;
     word-wrap: break-word;
-  }
-  
-  .note button {
-    position: relative;
-    float: right;
-    margin-right: 10px;
+}
+
+.note button {
+    align-self: flex-end;
+    margin-right: 0;
     color: #f5ba13;
     border: none;
-    width: 36px;
-    height: 36px;
+    width: 40px;
+    height: 40px;
     cursor: pointer;
     outline: none;
     background-color: transparent;
-    font-size: 1.2rem;
-  }
-  
-  form.create-note {
+    font-size: 1.5rem;
+    transition: background 0.2s;
+    border-radius: 50%;
+}
+
+.note button:active {
+    background: #f5ba13;
+    color: #fff;
+}
+
+form.create-note {
     position: relative;
     width: 480px;
+    max-width: 95vw;
     margin: 30px auto 20px auto;
     background: #fff;
     padding: 15px;
     border-radius: 7px;
     box-shadow: 0 1px 5px rgb(138, 137, 137);
-  }
-  
-  form.create-note input,
-  form.create-note textarea {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+form.create-note input,
+form.create-note textarea {
     width: 100%;
     border: none;
-    padding: 4px;
+    padding: 8px;
     outline: none;
     font-size: 1.2em;
     font-family: inherit;
     resize: none;
-  }
-  
-  form.create-note button {
+    border-radius: 4px;
+    background: #f9f9f9;
+}
+
+form.create-note button {
     position: absolute;
     right: 18px;
     bottom: -18px;
@@ -106,36 +138,86 @@
     color: #fff;
     border: none;
     border-radius: 50%;
-    width: 36px;
-    height: 36px;
+    width: 44px;
+    height: 44px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
     cursor: pointer;
     outline: none;
-  }
-  
-  .filter-bar {
+    font-size: 1.5rem;
     display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.filter-bar {
+    display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
     width: 480px;
+    max-width: 95vw;
     margin: 20px auto;
     background: #fff;
     padding: 10px 15px;
     border-radius: 7px;
     box-shadow: 0 1px 5px rgb(138, 137, 137);
-  }
-  
-  .filter-bar select {
-    padding: 5px;
+    gap: 10px;
+}
+
+.filter-bar select {
+    padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
     font-family: inherit;
-  }
-  
-  .filter-bar input {
-    padding: 5px;
+    font-size: 1em;
+}
+
+.filter-bar input {
+    padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
     font-family: inherit;
     width: 60%;
-  }
+    font-size: 1em;
+}
+
+@media (max-width: 700px) {
+    .main-notes-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    .note {
+        width: 90vw;
+        margin: 10px 0;
+    }
+    form.create-note, .filter-bar {
+        width: 98vw;
+        max-width: 98vw;
+        margin: 10px auto;
+        padding: 10px 5px;
+    }
+    header {
+        padding: 12px 8px;
+    }
+    header h1 {
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .note {
+        width: 98vw;
+        padding: 8px;
+    }
+    form.create-note, .filter-bar {
+        width: 99vw;
+        max-width: 99vw;
+        padding: 8px 2px;
+    }
+    .filter-bar input {
+        width: 100%;
+    }
+    header h1 {
+        font-size: 1.1rem;
+    }
+}

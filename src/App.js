@@ -33,23 +33,24 @@ function NoteList() {
     <div>
       <FilterBar onFilterChange={handleFilterChange} />
       <CreateArea />
-      
-      {filteredNotes.length === 0 ? (
-        <div style={{ textAlign: "center", marginTop: "50px", color: "#888" }}>
-          <p>No notes found. Try changing your filters or add a new note.</p>
-        </div>
-      ) : (
-        filteredNotes.map(note => (
-          <Note
-            key={note.id}
-            id={note.id}
-            title={note.title}
-            content={note.content}
-            priority={note.priority}
-            createdAt={note.createdAt}
-          />
-        ))
-      )}
+      <div className="main-notes-container">
+        {filteredNotes.length === 0 ? (
+          <div style={{ textAlign: "center", marginTop: "50px", color: "#888" }}>
+            <p>No notes found. Try changing your filters or add a new note.</p>
+          </div>
+        ) : (
+          filteredNotes.map(note => (
+            <Note
+              key={note.id}
+              id={note.id}
+              title={note.title}
+              content={note.content}
+              priority={note.priority}
+              createdAt={note.createdAt}
+            />
+          ))
+        )}
+      </div>
     </div>
   );
 }
