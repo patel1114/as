@@ -7,7 +7,7 @@ import CreateArea from "./components/CreateArea";
 import FilterBar from "./components/FilterBar";
 import { NoteProvider, NoteContext } from "./context/NoteContext";
 
-function NoteList() {
+const NoteList = () => {
   const { notes } = useContext(NoteContext);
   const [filters, setFilters] = useState({
     priority: "all",
@@ -18,12 +18,10 @@ function NoteList() {
   const [expandForm, setExpandForm] = useState(false);
   const formRef = useRef(null);
 
-  // Handle filter changes from FilterBar
   const handleFilterChange = (newFilters) => {
     setFilters(newFilters);
   };
 
-  // Apply filters to notes
   const filteredNotes = notes.filter(note => {
     const matchesPriority = filters.priority === "all" || note.priority === filters.priority;
     const matchesColor = !filters.color || filters.color === "all" || note.color === filters.color;
@@ -33,12 +31,10 @@ function NoteList() {
     return matchesPriority && matchesColor && matchesSearch;
   });
 
-  // Split notes into pinned, others, and archived
   const pinnedNotes = filteredNotes.filter(n => n.pinned && !n.archived);
   const otherNotes = filteredNotes.filter(n => !n.pinned && !n.archived);
   const archivedNotes = filteredNotes.filter(n => n.archived);
 
-  // FAB click handler
   const handleFabClick = () => {
     setExpandForm(true);
     setTimeout(() => {
@@ -49,15 +45,15 @@ function NoteList() {
   };
 
   return (
-    <div>
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 pb-24">
       <FilterBar onFilterChange={handleFilterChange} />
       <div ref={formRef}>
         <CreateArea forceExpand={expandForm} onExpandEnd={() => setExpandForm(false)} />
       </div>
-      <div style={{ textAlign: "right", margin: "0 10px 10px 0" }}>
+      <div className="flex justify-end px-4 mb-2">
         <button
           onClick={() => setShowArchive(a => !a)}
-          style={{ background: showArchive ? "#f5ba13" : "#eee", color: showArchive ? "#fff" : "#333", border: "none", borderRadius: 4, padding: "6px 14px", cursor: "pointer", fontWeight: 600 }}
+          className={`rounded px-4 py-2 font-semibold transition-colors duration-200 ${showArchive ? "bg-blue-700 text-white" : "bg-blue-100 text-blue-700"}`}
         >
           {showArchive ? "Hide Archive" : `Show Archive (${archivedNotes.length})`}
         </button>
@@ -66,7 +62,7 @@ function NoteList() {
         <>
           {pinnedNotes.length > 0 && (
             <>
-              <h3 style={{ marginLeft: 16, color: "#f5ba13" }}>Pinned</h3>
+              <h3 className="ml-4 text-blue-700 font-bold text-lg">Pinned</h3>
               <div className="main-notes-container">
                 {pinnedNotes.map(note => (
                   <Note key={note.id} {...note} />
@@ -76,7 +72,7 @@ function NoteList() {
           )}
           {otherNotes.length > 0 && (
             <>
-              {pinnedNotes.length > 0 && <h3 style={{ marginLeft: 16, color: "#888" }}>Others</h3>}
+              {pinnedNotes.length > 0 && <h3 className="ml-4 text-gray-500 font-semibold text-md">Others</h3>}
               <div className="main-notes-container">
                 {otherNotes.map(note => (
                   <Note key={note.id} {...note} />
@@ -85,25 +81,21 @@ function NoteList() {
             </>
           )}
           {pinnedNotes.length === 0 && otherNotes.length === 0 && (
-            <div style={{ textAlign: "center", marginTop: "50px", color: "#888" }}>
-              <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 12 }}>
-                <span style={{ fontSize: 64, opacity: 0.3 }}>🗒️</span>
-                <p>No notes found. Try changing your filters or add a new note.</p>
-              </div>
+            <div className="flex flex-col items-center mt-12 text-gray-400">
+              <span className="text-6xl opacity-30">🗒️</span>
+              <p>No notes found. Try changing your filters or add a new note.</p>
             </div>
           )}
         </>
       )}
       {showArchive && (
         <>
-          <h3 style={{ marginLeft: 16, color: "#388e3c" }}>Archived Notes</h3>
+          <h3 className="ml-4 text-green-700 font-bold text-lg">Archived Notes</h3>
           <div className="main-notes-container">
             {archivedNotes.length === 0 ? (
-              <div style={{ textAlign: "center", marginTop: "50px", color: "#888" }}>
-                <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 12 }}>
-                  <span style={{ fontSize: 64, opacity: 0.3 }}>📦</span>
-                  <p>No archived notes.</p>
-                </div>
+              <div className="flex flex-col items-center mt-12 text-gray-400">
+                <span className="text-6xl opacity-30">📦</span>
+                <p>No archived notes.</p>
               </div>
             ) : (
               archivedNotes.map(note => <Note key={note.id} {...note} />)
@@ -116,18 +108,16 @@ function NoteList() {
       </button>
     </div>
   );
-}
+};
 
-function App() {
-  return (
-    <NoteProvider>
-      <div>
-        <Header />
-        <NoteList />
-        <Footer />
-      </div>
-    </NoteProvider>
-  );
-}
+const App = () => (
+  <NoteProvider>
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-blue-50 to-blue-100">
+      <Header />
+      <NoteList />
+      <Footer />
+    </div>
+  </NoteProvider>
+);
 
 export default App;
